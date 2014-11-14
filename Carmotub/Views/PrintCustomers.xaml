@@ -1,0 +1,61 @@
+﻿<Window x:Class="Carmotub.Views.PrintCustomers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Imprimer une fiche d'intervention" Height="460" Width="510" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Initialized="Window_Initialized_1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Impression fiches intervention" Margin="5,0,0,0" FontSize="36" FontFamily="Segoe UI Light"/>
+
+        <TextBlock Grid.Row="1" Text="Imprimer un client :" FontSize="20" FontFamily="Segoe UI Light" Margin="5,10,0,0"/>
+
+        <StackPanel Orientation="Vertical" Grid.Row="2">
+            <StackPanel Orientation="Vertical" Margin="0,5,0,0">
+                <TextBlock Text="Rechercher le client par nom : " FontSize="14" FontFamily="Segoe UI Light" Margin="5,0,0,0"/>
+
+                <Border x:Name="SearchBorder" Width="200" HorizontalAlignment="Left" Margin="5,5,0,5" Height="20" BorderBrush="LightGray" Visibility="Visible" BorderThickness="1" Background="White">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="SearchBoxText" Width="180"  BorderBrush="Transparent" BorderThickness="0"/>
+                        <Button x:Name="SearchButton" Background="Transparent" BorderBrush="Transparent" Click="SearchButton_Click">
+                            <Button.Content>
+                                <Image Source="/Carmotub;component/Assets/search.png"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                
+                <DataGrid x:Name="DataGridCustomers" Margin="5" Height="120" ColumnWidth="*" FontFamily="Segoe UI Light" Background="White" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nom" Binding="{Binding nom}" />
+                        <DataGridTextColumn Header="Prénom" Binding="{Binding prenom}" />
+                        <DataGridTextColumn Header="Ville" Binding="{Binding ville}" />
+                        <DataGridTextColumn Header="Code postal" Binding="{Binding code_postal}" />
+                        <DataGridTextColumn Header="Num tel fixe " Binding="{Binding telephone_1}" />
+                        <DataGridTextColumn Header="Rendez vous" Binding="{Binding Rdv}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <Button x:Name="PrintCustomer" Content="Imprimer le client" FontSize="14" FontFamily="Segoe UI Light" Width="140" HorizontalAlignment="Left" Margin="5,5,0,0" Click="PrintCustomer_Click"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" Text="Imprimer le planning : " FontSize="20" FontFamily="Segoe UI Light" Margin="5,10,0,0"/>
+
+        <StackPanel Orientation="Vertical" Grid.Row="4">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Selectionner une date : " VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Light" Margin="5,0,0,0" />
+                <DatePicker x:Name="SelectedDate" BorderBrush="LightGray" SelectedDate="{x:Static sys:DateTime.Now}" FontSize="14" FontFamily="Segoe UI Light" Width="200" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <Button x:Name="PrintPlanning" Content="Imprimer le planning" FontSize="14" FontFamily="Segoe UI Light" Width="140" HorizontalAlignment="Left" Margin="5,10,0,0" Click="PrintPlanning_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
