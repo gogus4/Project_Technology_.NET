@@ -20,7 +20,6 @@
           <Property Name="nom" Type="ntext" />
           <Property Name="prenom" Type="ntext" />
           <Property Name="adresse" Type="ntext" />
-          <Property Name="code_postal" Type="ntext" />
           <Property Name="ville" Type="ntext" />
           <Property Name="etage" Type="ntext" />
           <Property Name="escalier" Type="ntext" />
@@ -30,8 +29,7 @@
           <Property Name="code" Type="ntext" />
           <Property Name="rdv" Type="ntext" />
           <Property Name="recommande_par" Type="ntext" />
-          <Property Name="voie" Type="ntext" />
-          <Property Name="numero_adresse" Type="ntext" />
+          <Property Name="code_postal" Type="ntext" />
         </EntityType>
         <EntityType Name="Intervention">
           <Key>
@@ -103,11 +101,11 @@
           <EntitySet Name="Customer" EntityType="carmotubModel.Customer" />
           <EntitySet Name="Intervention" EntityType="carmotubModel.Intervention" />
           <EntitySet Name="PhotoClient" EntityType="carmotubModel.PhotoClient" />
-          <AssociationSet Name="FK_interventions_clients1" Association="carmotubModel.FK_interventions_clients1">
+          <AssociationSet Name="FK_interventions_clients" Association="carmotubModel.FK_interventions_clients">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Intervention" EntitySet="Intervention" />
           </AssociationSet>
-          <AssociationSet Name="FK_photos_client_clients1" Association="carmotubModel.FK_photos_client_clients1">
+          <AssociationSet Name="FK_photos_client_clients" Association="carmotubModel.FK_photos_client_clients">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="PhotoClient" EntitySet="PhotoClient" />
           </AssociationSet>
@@ -127,7 +125,6 @@
           <Property Name="nom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="prenom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="code_postal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ville" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="etage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="escalier" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -137,10 +134,9 @@
           <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="rdv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="recommande_par" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="voie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="numero_adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Intervention" Relationship="carmotubModel.FK_interventions_clients1" FromRole="Customer" ToRole="Intervention" />
-          <NavigationProperty Name="PhotoClient" Relationship="carmotubModel.FK_photos_client_clients1" FromRole="Customer" ToRole="PhotoClient" />
+          <Property Name="code_postal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Intervention" Relationship="carmotubModel.FK_interventions_clients" FromRole="Customer" ToRole="Intervention" />
+          <NavigationProperty Name="PhotoClient" Relationship="carmotubModel.FK_photos_client_clients" FromRole="Customer" ToRole="PhotoClient" />
         </EntityType>
         <EntityType Name="Intervention">
           <Key>
@@ -156,7 +152,7 @@
           <Property Name="montant_old" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="numero_cheque" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="type_paiement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customer" Relationship="carmotubModel.FK_interventions_clients1" FromRole="Intervention" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="carmotubModel.FK_interventions_clients" FromRole="Intervention" ToRole="Customer" />
         </EntityType>
         <EntityType Name="PhotoClient">
           <Key>
@@ -165,9 +161,9 @@
           <Property Name="identifiant" Type="Int32" Nullable="false" />
           <Property Name="uri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="identifiant_client" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="carmotubModel.FK_photos_client_clients1" FromRole="PhotoClient" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="carmotubModel.FK_photos_client_clients" FromRole="PhotoClient" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_interventions_clients1">
+        <Association Name="FK_interventions_clients">
           <End Type="carmotubModel.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="carmotubModel.Intervention" Role="Intervention" Multiplicity="*" />
           <ReferentialConstraint>
@@ -179,7 +175,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_photos_client_clients1">
+        <Association Name="FK_photos_client_clients">
           <End Type="carmotubModel.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="carmotubModel.PhotoClient" Role="PhotoClient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -191,7 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -208,8 +204,7 @@
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="carmotubModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="numero_adresse" ColumnName="numero_adresse" />
-                <ScalarProperty Name="voie" ColumnName="voie" />
+                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
                 <ScalarProperty Name="recommande_par" ColumnName="recommande_par" />
                 <ScalarProperty Name="rdv" ColumnName="rdv" />
                 <ScalarProperty Name="code" ColumnName="code" />
@@ -219,7 +214,6 @@
                 <ScalarProperty Name="escalier" ColumnName="escalier" />
                 <ScalarProperty Name="etage" ColumnName="etage" />
                 <ScalarProperty Name="ville" ColumnName="ville" />
-                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
                 <ScalarProperty Name="adresse" ColumnName="adresse" />
                 <ScalarProperty Name="prenom" ColumnName="prenom" />
                 <ScalarProperty Name="nom" ColumnName="nom" />

@@ -71,3 +71,5 @@ C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\bin\Debug\Entit
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\bin\Debug\EntityFramework.xml
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\bin\Debug\fr\EntityFramework.resources.dll
+C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\Administration.baml
+C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\Administration.g.cs

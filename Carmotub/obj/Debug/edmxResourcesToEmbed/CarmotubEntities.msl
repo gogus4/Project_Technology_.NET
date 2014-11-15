@@ -12,8 +12,7 @@
     <EntitySetMapping Name="Customer">
       <EntityTypeMapping TypeName="carmotubModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="numero_adresse" ColumnName="numero_adresse" />
-          <ScalarProperty Name="voie" ColumnName="voie" />
+          <ScalarProperty Name="code_postal" ColumnName="code_postal" />
           <ScalarProperty Name="recommande_par" ColumnName="recommande_par" />
           <ScalarProperty Name="rdv" ColumnName="rdv" />
           <ScalarProperty Name="code" ColumnName="code" />
@@ -23,7 +22,6 @@
           <ScalarProperty Name="escalier" ColumnName="escalier" />
           <ScalarProperty Name="etage" ColumnName="etage" />
           <ScalarProperty Name="ville" ColumnName="ville" />
-          <ScalarProperty Name="code_postal" ColumnName="code_postal" />
           <ScalarProperty Name="adresse" ColumnName="adresse" />
           <ScalarProperty Name="prenom" ColumnName="prenom" />
           <ScalarProperty Name="nom" ColumnName="nom" />

@@ -187,7 +187,8 @@ namespace Carmotub
 
         private void Administration_Click(object sender, RoutedEventArgs e)
         {
-
+            Administration admin = new Administration();
+            admin.Show();
         }
     }
 }

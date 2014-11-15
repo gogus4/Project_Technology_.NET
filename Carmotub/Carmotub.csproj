@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="Data\CarmotubServerEntities.cs" />
     <Compile Include="Data\SQLDataHelper.cs" />
+    <Compile Include="Data\UIHelper.cs" />
     <Compile Include="Intervention.cs">
       <DependentUpon>CarmotubEntities.tt</DependentUpon>
     </Compile>
@@ -107,6 +108,9 @@
     <Compile Include="ViewModel\CustomerPhotoVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
     <Compile Include="ViewModel\InterventionVM.cs" />
+    <Compile Include="Views\Administration.xaml.cs">
+      <DependentUpon>Administration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PrintCustomers.xaml.cs">
       <DependentUpon>PrintCustomers.xaml</DependentUpon>
     </Compile>
@@ -146,6 +150,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Administration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PrintCustomers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -273,6 +281,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Ribbon\admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

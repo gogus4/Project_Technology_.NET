@@ -24,7 +24,6 @@ namespace Carmotub
         public string nom { get; set; }
         public string prenom { get; set; }
         public string adresse { get; set; }
-        public string code_postal { get; set; }
         public string ville { get; set; }
         public string etage { get; set; }
         public string escalier { get; set; }
@@ -34,8 +33,7 @@ namespace Carmotub
         public string code { get; set; }
         public string rdv { get; set; }
         public string recommande_par { get; set; }
-        public string voie { get; set; }
-        public string numero_adresse { get; set; }
+        public string code_postal { get; set; }
     
         public virtual ICollection<Intervention> Intervention { get; set; }
         public virtual ICollection<PhotoClient> PhotoClient { get; set; }

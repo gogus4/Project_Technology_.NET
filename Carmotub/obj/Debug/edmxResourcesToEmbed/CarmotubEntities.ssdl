@@ -15,7 +15,6 @@
     <Property Name="nom" Type="ntext" />
     <Property Name="prenom" Type="ntext" />
     <Property Name="adresse" Type="ntext" />
-    <Property Name="code_postal" Type="ntext" />
     <Property Name="ville" Type="ntext" />
     <Property Name="etage" Type="ntext" />
     <Property Name="escalier" Type="ntext" />
@@ -25,8 +24,7 @@
     <Property Name="code" Type="ntext" />
     <Property Name="rdv" Type="ntext" />
     <Property Name="recommande_par" Type="ntext" />
-    <Property Name="voie" Type="ntext" />
-    <Property Name="numero_adresse" Type="ntext" />
+    <Property Name="code_postal" Type="ntext" />
   </EntityType>
   <EntityType Name="Intervention">
     <Key>
