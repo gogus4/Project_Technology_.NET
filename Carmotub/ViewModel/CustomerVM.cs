@@ -128,7 +128,14 @@ namespace Carmotub.ViewModel
 
         public async Task<List<Customer>> GetAllCustomer()
         {
-            return CarmotubServerEntities.Instance.Customer.ToList();
+            try
+            {
+                return CarmotubServerEntities.Instance.Customer.ToList();
+            }
+            catch(Exception E)
+            {
+                return null;
+            }
         }
     }
 }

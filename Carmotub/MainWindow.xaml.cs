@@ -19,6 +19,8 @@ using Carmotub.Views;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Data.Entity;
+using Carmotub.Data;
 
 namespace Carmotub
 {
@@ -31,6 +33,8 @@ namespace Carmotub
             InitializeComponent();
 
             GetLastDateTimeBackup();
+
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CarmotubEntities>());
         }
 
         private async void GetLastDateTimeBackup()
