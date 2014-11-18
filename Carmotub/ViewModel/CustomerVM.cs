@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,13 +24,34 @@ namespace Carmotub.ViewModel
             }
         }
 
+        public List<String> columns { get; set; }
+
         public CustomerVM()
         {
         }
 
+        public async Task<bool> DropColumnCustomer(string column)
+        {
+            try
+            {
+                string query = string.Format("ALTER TABLE clients DROP COLUMN {0}",column);
+
+                await SQLDataHelper.Instance.OpenConnection();
+
+                MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception E)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<bool> DeleteCustomer(Customer customer)
         {
-            /*try
+            try
             {
                 string query = "DELETE FROM clients WHERE identifiant = @identifiant";
 
@@ -47,14 +69,14 @@ namespace Carmotub.ViewModel
             catch (Exception E)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }
 
         public async Task<bool> UpdateCustomer(Customer customer)
         {
-            /*try
+            try
             {
                 string query = "UPDATE clients SET nom = @nom, prenom = @prenom, adresse = @adresse, code_postal = @code_postal, ville = @ville, etage = @etage, escalier = @escalier, telephone_1=@telephone_1,telephone_2=@telephone_2,commentaire=@commentaire,code=@code,rdv=@rdv,recommande_par=@recommande_par,voie=@voie,numero_adresse=@numero_adresse WHERE identifiant = @identifiant";
                 await SQLDataHelper.Instance.OpenConnection();
@@ -85,14 +107,14 @@ namespace Carmotub.ViewModel
             catch (Exception E)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }
 
         public async Task<bool> AddCustomer(Customer customer)
         {
-            /*try
+            try
             {
                 string query = "INSERT INTO clients(nom,prenom,adresse,code_postal,ville,etage,escalier,telephone_1,telephone_2,commentaire,recommande_par,code,rdv,voie,numero_adresse) VALUES(@nom,@prenom,@adresse,@code_postal,@ville,@etage,@escalier,@telephone_1,@telephone_2,@commentaire,@recommande_par,@code,@rdv,@voie,@numero_adresse)";
                 await SQLDataHelper.Instance.OpenConnection();
@@ -121,20 +143,47 @@ namespace Carmotub.ViewModel
             catch (Exception E)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }
 
-        public async Task<List<Customer>> GetAllCustomer()
+        public async Task<List<Dictionary<string, string>>> GetAllCustomer()
         {
-            try
+            List<Dictionary<string, string>> customers = new List<Dictionary<string, string>>();
+
+            string query = "SELECT * from clients";
+            await SQLDataHelper.Instance.OpenConnection();
+            MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+            while (dataReader.Read())
             {
-                return CarmotubServerEntities.Instance.Customer.ToList();
+                Dictionary<string, string> customer = new Dictionary<string, string>();
+                for (int i = 0; i < CustomerVM.Instance.columns.Count; i++)
+                {
+                    customer.Add(CustomerVM.Instance.columns[i], dataReader[i].ToString());
+                }
+                customers.Add(customer);
             }
-            catch(Exception E)
+
+            return customers;
+        }
+
+        public async Task GetColumns()
+        {
+            columns = new List<String>();
+            await SQLDataHelper.Instance.OpenConnection();
+
+            using (MySqlCommand cmd = new MySqlCommand("select column_name from information_schema.columns where table_name = 'clients'", SQLDataHelper.Instance.Connection))
             {
-                return null;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        columns.Add(reader.GetString(0));
+                    }
+                }
             }
         }
     }

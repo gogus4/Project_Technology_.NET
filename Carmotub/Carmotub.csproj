@@ -71,39 +71,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BackupDatabase.cs">
-      <DependentUpon>CarmotubEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarmotubEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarmotubEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarmotubEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarmotubEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarmotubEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CarmotubEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Customer.cs">
-      <DependentUpon>CarmotubEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\CarmotubServerEntities.cs" />
     <Compile Include="Data\SQLDataHelper.cs" />
     <Compile Include="Data\UIHelper.cs" />
-    <Compile Include="Intervention.cs">
-      <DependentUpon>CarmotubEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\CustomerPhoto.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Intervention.cs" />
-    <Compile Include="PhotoClient.cs">
-      <DependentUpon>CarmotubEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\BackupDatabaseVM.cs" />
     <Compile Include="ViewModel\CustomerPhotoVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
@@ -209,23 +181,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="CarmotubEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarmotubEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="CarmotubEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarmotubEntities.edmx</DependentUpon>
-      <LastGenOutput>CarmotubEntities.Context.cs</LastGenOutput>
-    </None>
-    <None Include="CarmotubEntities.edmx.diagram">
-      <DependentUpon>CarmotubEntities.edmx</DependentUpon>
-    </None>
-    <None Include="CarmotubEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarmotubEntities.edmx</DependentUpon>
-      <LastGenOutput>CarmotubEntities.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

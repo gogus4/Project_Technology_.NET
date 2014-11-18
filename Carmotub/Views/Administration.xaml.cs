@@ -1,7 +1,12 @@
 ﻿using Carmotub.Data;
+using Carmotub.Model;
+using Carmotub.ViewModel;
+using Carmotub.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +30,16 @@ namespace Carmotub.Views
         public Administration()
         {
             InitializeComponent();
+            InitColumnsName();
+        }
 
+        private void InitColumnsName()
+        {
             var colNames = new List<string>();
 
-            // Exceptions
-            foreach (string col in typeof(Customer).GetProperties().Select(a => a.Name).ToList())
+            foreach (string col in CustomerVM.Instance.columns)
             {
-                if (col != "identifiant" && col != "Intervention" && col != "PhotoClient" && col != "nom" && col != "adresse" && col != "commentaire")
+                if (col != "identifiant" && col != "commentaire")
                     colNames.Add(col);
             }
 
@@ -42,14 +50,18 @@ namespace Carmotub.Views
         {
             string col_name = DataGridCustomerColumn.SelectedItem.ToString();
 
-            /*ALTER TABLE nom_table
-DROP nom_colonne*/
-
             var dialogResult = System.Windows.Forms.MessageBox.Show(string.Format("Etes-vous sur de vouloir supprimer la colonne {0} ?", col_name), "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult.ToString() == "Yes")
             {
-               CarmotubServerEntities.Instance.Database.ExecuteSqlCommand(string.Format("ALTER TABLE Customer DROP COLUMN {0}",col_name));
-               await CarmotubServerEntities.Instance.SaveChangesAsync();
+                if (await CustomerVM.Instance.DropColumnCustomer(col_name) == true)
+                {
+                    await ActionsCustomers.Instance.Init();
+                    InitColumnsName();
+                }
+
+                else
+                    System.Windows.Forms.MessageBox.Show("Une erreur est survenue lors de la suppression de la colonne.", "Erreur");
+
             }
         }
 

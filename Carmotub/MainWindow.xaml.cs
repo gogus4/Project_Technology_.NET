@@ -33,8 +33,6 @@ namespace Carmotub
             InitializeComponent();
 
             GetLastDateTimeBackup();
-
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CarmotubEntities>());
         }
 
         private async void GetLastDateTimeBackup()
@@ -49,6 +47,8 @@ namespace Carmotub
                     StartBackupDatabase();
                 }
             }
+
+            await CustomerVM.Instance.GetColumns();
         }
 
         private async void DisplayCalendar_Click(object sender, RoutedEventArgs e)

@@ -28,10 +28,12 @@ namespace Carmotub.Views
             int i = 0;
             int nbRow = 0;
 
+            colNames = new List<string>();
+
             // Exceptions
-            foreach (string col in typeof(Customer).GetProperties().Select(a => a.Name).ToList())
+            foreach (string col in CustomerVM.Instance.columns)
             {
-                if (col != "identifiant" && col != "Intervention" && col != "PhotoClient" && col != "commentaire")
+                if (col != "identifiant" && col != "commentaire")
                     colNames.Add(col);
             }
 
@@ -150,33 +152,7 @@ namespace Carmotub.Views
 
             foreach (string col in colNames)
             {
-                /*
-                 * 
-                 * MyObject myObjectInstance = new MyObject();
-
-foreach (System.Reflection.FieldInfo info in fieldInfo)
-{
-   switch (info.Name)
-   {
-      case "myStringField":
-         info.SetValue(myObjectInstance, "string value");
-         break;
-      case "myIntField":
-         info.SetValue(myObjectInstance, 42);
-         break;
-      case "myObjectField":
-         info.SetValue(myObjectInstance, myObjectInstance);
-         break;
-   }
-}
-
-//read back the field information
-foreach (System.Reflection.FieldInfo info in fieldInfo)
-{
-   Console.WriteLine(info.Name + ": " + 
-      info.GetValue(myObjectInstance).ToString());
-}
-*/
+                
             }
         }
     }

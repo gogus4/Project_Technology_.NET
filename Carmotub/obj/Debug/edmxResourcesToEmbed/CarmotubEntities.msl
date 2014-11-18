@@ -4,7 +4,6 @@
     <EntitySetMapping Name="BackupDatabase">
       <EntityTypeMapping TypeName="carmotubModel.BackupDatabase">
         <MappingFragment StoreEntitySet="BackupDatabase">
-          <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="identifiant" ColumnName="identifiant" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -21,7 +20,6 @@
           <ScalarProperty Name="telephone_1" ColumnName="telephone_1" />
           <ScalarProperty Name="escalier" ColumnName="escalier" />
           <ScalarProperty Name="etage" ColumnName="etage" />
-          <ScalarProperty Name="ville" ColumnName="ville" />
           <ScalarProperty Name="adresse" ColumnName="adresse" />
           <ScalarProperty Name="prenom" ColumnName="prenom" />
           <ScalarProperty Name="nom" ColumnName="nom" />
@@ -37,9 +35,7 @@
           <ScalarProperty Name="montant_old" ColumnName="montant_old" />
           <ScalarProperty Name="montant" ColumnName="montant" />
           <ScalarProperty Name="nature" ColumnName="nature" />
-          <ScalarProperty Name="carnet" ColumnName="carnet" />
           <ScalarProperty Name="type_chaudiere" ColumnName="type_chaudiere" />
-          <ScalarProperty Name="date_intervention" ColumnName="date_intervention" />
           <ScalarProperty Name="identifiant_client" ColumnName="identifiant_client" />
           <ScalarProperty Name="identifiant" ColumnName="identifiant" />
         </MappingFragment>

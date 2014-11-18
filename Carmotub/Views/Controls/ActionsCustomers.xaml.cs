@@ -3,6 +3,7 @@ using Carmotub.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Carmotub.Views.Controls
     public partial class ActionsCustomers : UserControl
     {
         public List<Customer> Customers { get; set; }
+        public DataTable Table { get; set; }
 
         private static ActionsCustomers _instance = null;
         public static ActionsCustomers Instance
@@ -56,14 +58,62 @@ namespace Carmotub.Views.Controls
 
         public async Task Init()
         {
-            Customers = await CustomerVM.Instance.GetAllCustomer();
+            Table = new DataTable();
+
+            Customers = new List<Customer>();
+            await CustomerVM.Instance.GetColumns();
 
             await CustomerPhotoVM.Instance.GetAllPhoto();
 
             if (Customers != null)
                 NumberCustomers.Text = Customers.Count().ToString();
 
-            DataGridCustomers.ItemsSource = Customers;
+            List<Dictionary<string, string>> list = await CustomerVM.Instance.GetAllCustomer();
+
+            DataGridCustomers.Columns.Clear();
+
+            foreach (Dictionary<string,string> d in list)
+            {
+                foreach (string key in d.Keys)
+                {
+                    Addcolumn(key);
+                }
+                break;
+            }
+
+            foreach (Dictionary<string,string> d in list)
+            {
+                DataRow row = Table.NewRow();
+
+                foreach (KeyValuePair<string,string> keyValue in d)
+                {
+                    row[keyValue.Key] = keyValue.Value;
+                }
+
+                Table.Rows.Add(row);
+            }
+
+            DataGridCustomers.ItemsSource = Table.DefaultView;
+        }
+
+        private void Addcolumn(string columnname)
+        {
+            if (!Table.Columns.Contains(columnname))
+            {
+                DataGridTextColumn dgColumn = new DataGridTextColumn();
+                dgColumn.Header = columnname;
+                dgColumn.Binding = new Binding(string.Format("[{0}]", columnname));
+                dgColumn.SortMemberPath = columnname;
+                dgColumn.IsReadOnly = true;
+
+                DataGridCustomers.Columns.Add(dgColumn);
+
+                DataColumn dtcolumn = new DataColumn();
+                dtcolumn.Caption = columnname;
+                dtcolumn.ColumnName = columnname;
+
+                Table.Columns.Add(dtcolumn);
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -109,10 +159,11 @@ namespace Carmotub.Views.Controls
         {
             try
             {
-                var customer = (Customer)DataGridCustomers.SelectedItem;
+                DataRow customer = ((DataRowView)DataGridCustomers.SelectedItem).Row;
+                string essai = customer["prenom"].ToString();
 
-                UpdateCustomer UpdateCustomer = new UpdateCustomer(customer);
-                UpdateCustomer.Show();
+                // UpdateCustomer UpdateCustomer = new UpdateCustomer(customer);
+                // UpdateCustomer.Show();
             }
             catch (Exception E)
             {

@@ -19,7 +19,6 @@
       <PropertyRef Name="identifiant" />
     </Key>
     <Property Name="identifiant" Type="Int32" Nullable="false" />
-    <Property Name="date" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -29,7 +28,6 @@
     <Property Name="nom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="prenom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="adresse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ville" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="etage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="escalier" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="telephone_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -48,9 +46,7 @@
     </Key>
     <Property Name="identifiant" Type="Int32" Nullable="false" />
     <Property Name="identifiant_client" Type="Int32" />
-    <Property Name="date_intervention" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="type_chaudiere" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="carnet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="montant" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="montant_old" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />

@@ -4,9 +4,11 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Carmotub.ViewModel
 {
@@ -51,7 +53,7 @@ namespace Carmotub.ViewModel
 
         public async Task<DateTime> GetLastBackupDatabase()
         {
-            /*try
+            try
             {
                 string query = "SELECT * FROM `backup_database` order by date desc LIMIT 1";
                 
@@ -64,7 +66,7 @@ namespace Carmotub.ViewModel
                     return (DateTime)dataReader["date"];
                 }
             }
-            catch (Exception E) { }*/
+            catch (Exception E) { }
 
             return DateTime.Now;
         }

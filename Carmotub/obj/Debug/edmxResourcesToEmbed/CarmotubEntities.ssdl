@@ -15,7 +15,6 @@
     <Property Name="nom" Type="ntext" />
     <Property Name="prenom" Type="ntext" />
     <Property Name="adresse" Type="ntext" />
-    <Property Name="ville" Type="ntext" />
     <Property Name="etage" Type="ntext" />
     <Property Name="escalier" Type="ntext" />
     <Property Name="telephone_1" Type="ntext" />
