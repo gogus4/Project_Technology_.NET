@@ -33,7 +33,31 @@
             </TabItem>
 
             <TabItem Header="Intervention">
+                <DataGrid x:Name="DataGridInterventionColumn" FontFamily="Segoe UI Light" Background="White" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="0.8*" Header="Nom de la colonne" Binding="{Binding}"/>
+                        <DataGridTemplateColumn Width="0.2*" TextBlock.TextAlignment="Center" Header="Actions">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
+                                        <Button Grid.Column="0" x:Name="EditCustomerColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="EditCustomerColumn_Click">
+                                            <Image Source="/Carmotub;component/Assets/edit.png" />
+                                        </Button>
+
+                                        <Button Grid.Column="1" x:Name="DeleteCustomerColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="DeleteCustomerColumn_Click">
+                                            <Image Source="/Carmotub;component/Assets/delete.png" Width="16" Height="16"/>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
         </TabControl>
     </Grid>

@@ -119,15 +119,16 @@ namespace Carmotub.Views
             }
 
             RowDefinition row1 = new RowDefinition();
-            row1.Height = new GridLength(20, GridUnitType.Pixel);
+            row1.Height = new GridLength(30, GridUnitType.Pixel);
             AddCustomerGridRow.RowDefinitions.Add(row1);
 
             TextBlock textBlockGeneric2 = new TextBlock();
             textBlockGeneric2.Text = "Commentaire : ";
             textBlockGeneric2.Height = 20;
+            textBlockGeneric2.Foreground = Brushes.Black;
             textBlockGeneric2.Margin = new Thickness(5, 0, 0, 0);
             Grid.SetColumn(textBlockGeneric2, 0);
-            Grid.SetRow(textBlockGeneric2, nbRow + 1);
+            Grid.SetRow(textBlockGeneric2, nbRow);
 
             AddCustomerGridRow.Children.Add(textBlockGeneric2);
 
@@ -138,21 +139,45 @@ namespace Carmotub.Views
             RichTextBox RichtextBoxGeneric1 = new RichTextBox();
             RichtextBoxGeneric1.Name = "commentaire_textbox";
             RichtextBoxGeneric1.Height = 100;
-            RichtextBoxGeneric1.Margin = new Thickness(5, 0, 0, 0);
+            RichtextBoxGeneric1.Margin = new Thickness(5, 0, 5, 0);
             Grid.SetColumnSpan(RichtextBoxGeneric1, 4);
             Grid.SetColumn(RichtextBoxGeneric1, 0);
-            Grid.SetRow(RichtextBoxGeneric1, nbRow + 2);
+            Grid.SetRow(RichtextBoxGeneric1, nbRow + 1);
 
             AddCustomerGridRow.Children.Add(RichtextBoxGeneric1);
         }
 
         private async void AddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            TextBox foundTextBox = UIHelper.Instance.FindChild<TextBox>(AddCustomerGridRow, "recommande_par_textbox");
+            string query = "INSERT INTO clients(";
 
             foreach (string col in colNames)
             {
-                
+                query += col + ",";
+            }
+
+            query += "commentaire) VALUES(";
+
+            foreach (string col in colNames)
+            {
+                TextBox foundTextBox = UIHelper.Instance.FindChild<TextBox>(AddCustomerGridRow, col + "_textbox");
+
+                query += @"'" + foundTextBox.Text + "',";
+            }
+
+            RichTextBox foundRichTextBox = UIHelper.Instance.FindChild<RichTextBox>(AddCustomerGridRow, "commentaire_textbox");
+
+            foundRichTextBox.SelectAll();
+            query += "'" + foundRichTextBox.Selection.Text + "')";
+
+            if(await CustomerVM.Instance.AddCustomer(query) == true)
+            {
+                await ActionsCustomers.Instance.Init();
+            }
+
+            else
+            {
+                MessageBox.Show("Une erreur est intervenue lors de l'ajout du client.", "Erreur client non ajouté", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

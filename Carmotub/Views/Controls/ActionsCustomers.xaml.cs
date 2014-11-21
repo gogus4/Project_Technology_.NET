@@ -21,7 +21,6 @@ namespace Carmotub.Views.Controls
 {
     public partial class ActionsCustomers : UserControl
     {
-        public List<Customer> Customers { get; set; }
         public DataTable Table { get; set; }
 
         private static ActionsCustomers _instance = null;
@@ -60,19 +59,19 @@ namespace Carmotub.Views.Controls
         {
             Table = new DataTable();
 
-            Customers = new List<Customer>();
             await CustomerVM.Instance.GetColumns();
+            await InterventionVM.Instance.GetColumns();
 
             await CustomerPhotoVM.Instance.GetAllPhoto();
 
-            if (Customers != null)
-                NumberCustomers.Text = Customers.Count().ToString();
+            List<Dictionary<string, string>> listCustomers = await CustomerVM.Instance.GetAllCustomer();
 
-            List<Dictionary<string, string>> list = await CustomerVM.Instance.GetAllCustomer();
+            if (listCustomers != null)
+                NumberCustomers.Text = listCustomers.Count().ToString();
 
             DataGridCustomers.Columns.Clear();
 
-            foreach (Dictionary<string,string> d in list)
+            foreach (Dictionary<string, string> d in listCustomers)
             {
                 foreach (string key in d.Keys)
                 {
@@ -81,7 +80,7 @@ namespace Carmotub.Views.Controls
                 break;
             }
 
-            foreach (Dictionary<string,string> d in list)
+            foreach (Dictionary<string, string> d in listCustomers)
             {
                 DataRow row = Table.NewRow();
 
@@ -243,7 +242,7 @@ namespace Carmotub.Views.Controls
 
         private void ValidSearchByNumberIntervention_Click(object sender, RoutedEventArgs e)
         {
-            List<Customer> list_customers = new List<Customer>();
+            /*List<Customer> list_customers = new List<Customer>();
             foreach (Customer customer in Customers)
             {
                 var list_intervention = InterventionVM.Instance.Interventions.Where(x => x.identifiant_client == customer.identifiant);
@@ -252,7 +251,7 @@ namespace Carmotub.Views.Controls
                     list_customers.Add(customer);
             }
 
-            DataGridCustomers.ItemsSource = list_customers;
+            DataGridCustomers.ItemsSource = list_customers;*/
         }
     }
 }

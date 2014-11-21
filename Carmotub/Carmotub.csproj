@@ -74,7 +74,6 @@
     <Compile Include="Data\SQLDataHelper.cs" />
     <Compile Include="Data\UIHelper.cs" />
     <Compile Include="Model\CustomerPhoto.cs" />
-    <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Intervention.cs" />
     <Compile Include="ViewModel\BackupDatabaseVM.cs" />
     <Compile Include="ViewModel\CustomerPhotoVM.cs" />

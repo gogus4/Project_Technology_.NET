@@ -42,16 +42,16 @@ namespace Carmotub.Views
 
         private async void Window_Initialized_1(object sender, EventArgs e)
         {
-            var Customers = ActionsCustomers.Instance.Customers;
-            DataGridCustomers.ItemsSource = Customers;
+            //var Customers = ActionsCustomers.Instance.Customers;
+            //DataGridCustomers.ItemsSource = Customers;
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            DataGridCustomers.ItemsSource = ActionsCustomers.Instance.Customers.Where(x => x.nom.ToUpper().Contains(SearchBoxText.Text.ToUpper())).ToList();
+            // DataGridCustomers.ItemsSource = ActionsCustomers.Instance.Customers.Where(x => x.nom.ToUpper().Contains(SearchBoxText.Text.ToUpper())).ToList();
         }
 
-        private void Print(Customer customer)
+        private void Print(string customer)
         {
             /*string fileText = "Carmotub                         " + customer.prenom + " " + customer.nom;
 
@@ -112,7 +112,7 @@ namespace Carmotub.Views
 
         private void PrintCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customer = (Customer)DataGridCustomers.SelectedItem;
+            /*var customer = (Customer)DataGridCustomers.SelectedItem;
 
             if (customer == null)
             {
@@ -120,7 +120,7 @@ namespace Carmotub.Views
                 return;
             }
 
-            Print(customer);
+            Print(customer);*/
         }
 
         private void PrintPlanning_Click(object sender, RoutedEventArgs e)

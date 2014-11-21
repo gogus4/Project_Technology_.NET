@@ -27,7 +27,7 @@ namespace Carmotub.ViewModel
         {
         }
 
-        public async Task<bool> DeletePhotoWithCustomer(Customer customer)
+        public async Task<bool> DeletePhotoWithCustomer(string customer)
         {
             /*try
             {

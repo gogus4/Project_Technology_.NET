@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Data.Entity;
 using Carmotub.Data;
+using System.Data;
 
 namespace Carmotub
 {
@@ -73,7 +74,7 @@ namespace Carmotub
 
         private async void RemoveCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customer = (Customer)ActionsCustomers.Instance.DataGridCustomers.SelectedItem;
+            /*var customer = (Customer)ActionsCustomers.Instance.DataGridCustomers.SelectedItem;
 
             if (customer != null)
             {
@@ -92,21 +93,29 @@ namespace Carmotub
             }
 
             else
-                MessageBox.Show("Merci de selectionné un client avant de le supprimer.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                MessageBox.Show("Merci de selectionné un client avant de le supprimer.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);*/
         }
 
         private void AddIntervention_Click(object sender, RoutedEventArgs e)
         {
-            var customer = (Customer)ActionsCustomers.Instance.DataGridCustomers.SelectedItem;
-            if (customer != null)
+            try
             {
-                AddIntervention addIntervention = new AddIntervention(customer);
-                addIntervention.Show();
-            }
+                DataRow customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
 
-            else
+                if (customer != null)
+                {
+                    AddIntervention addIntervention = new AddIntervention(customer);
+                    addIntervention.Show();
+                }
+
+                else
+                    MessageBox.Show("Merci de selectionné un client pour pouvoir affecté l'intervention à un client.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            }
+            catch (Exception E) 
+            {
                 MessageBox.Show("Merci de selectionné un client pour pouvoir affecté l'intervention à un client.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private async void StartBackupDatabase()

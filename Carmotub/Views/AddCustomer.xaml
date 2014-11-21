@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Ajouter un client" Height="Auto" SizeToContent="Height" Width="520" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <StackPanel Orientation="Vertical">
+        <TextBlock Text="Ajouter un client" FontSize="24" FontFamily="Segoe UI Light" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+        
         <Grid x:Name="AddCustomerGridRow">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.22*"/>

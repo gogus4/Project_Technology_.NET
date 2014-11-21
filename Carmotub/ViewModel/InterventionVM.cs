@@ -2,6 +2,7 @@
 using Carmotub.Model;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace Carmotub.ViewModel
     {
         private ObservableCollection<Intervention> _interventions;
         public ObservableCollection<Intervention> Interventions { get { return _interventions; } set { _interventions = value; } }
+
+        public List<String> columns { get; set; }
 
         private static InterventionVM _instance = null;
         public static InterventionVM Instance
@@ -29,7 +32,7 @@ namespace Carmotub.ViewModel
             _interventions = new ObservableCollection<Intervention>();
         }
 
-        public async Task<bool> DeleteInterventionWithCustomer(Customer customer)
+        public async Task<bool> DeleteInterventionWithCustomer(string customer)
         {
             /*try
             {
@@ -83,33 +86,19 @@ namespace Carmotub.ViewModel
             return true;
         }
 
-        public async Task<bool> AddIntervention(Intervention intervention)
+        public async Task<bool> AddIntervention(string query)
         {
-            /*try
+            try
             {
-                string query = "INSERT INTO interventions(identifiant_client,date_intervention,type_chaudiere,carnet,nature,montant,type_paiement,numero_cheque) VALUES(@identifiant_client,@date_intervention,@type_chaudiere,@carnet,@nature,@montant,@type_paiement,@numero_cheque)";
                 await SQLDataHelper.Instance.OpenConnection();
 
                 MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
-                cmd.Prepare();
-
-                cmd.Parameters.Add("@identifiant_client", intervention.identifiant_client);
-                cmd.Parameters.Add("@date_intervention", intervention.date);
-                cmd.Parameters.Add("@type_chaudiere", intervention.type_chaudiere);
-                cmd.Parameters.Add("@carnet", intervention.carnet);
-                cmd.Parameters.Add("@nature", intervention.nature);
-                cmd.Parameters.Add("@montant", intervention.montant);
-                cmd.Parameters.Add("@type_paiement", intervention.type_paiement);
-                cmd.Parameters.Add("@numero_cheque", intervention.numero_cheque);
-
                 cmd.ExecuteNonQuery();
-
-                await GetAllIntervention();
             }
             catch (Exception E)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }
@@ -191,6 +180,23 @@ namespace Carmotub.ViewModel
             }*/
 
             return true;
+        }
+
+        public async Task GetColumns()
+        {
+            columns = new List<String>();
+            await SQLDataHelper.Instance.OpenConnection();
+
+            using (MySqlCommand cmd = new MySqlCommand("select column_name from information_schema.columns where table_name = 'interventions'", SQLDataHelper.Instance.Connection))
+            {
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        columns.Add(reader.GetString(0));
+                    }
+                }
+            }
         }
     }
 }

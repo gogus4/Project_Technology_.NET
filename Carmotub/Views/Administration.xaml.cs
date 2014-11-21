@@ -1,30 +1,11 @@
-﻿using Carmotub.Data;
-using Carmotub.Model;
-using Carmotub.ViewModel;
+﻿using Carmotub.ViewModel;
 using Carmotub.Views.Controls;
-using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Carmotub.Views
 {
-    /// <summary>
-    /// Logique d'interaction pour Administration.xaml
-    /// </summary>
     public partial class Administration : Window
     {
         public Administration()
@@ -44,6 +25,15 @@ namespace Carmotub.Views
             }
 
             DataGridCustomerColumn.ItemsSource = colNames;
+
+            colNames = new List<string>();
+            foreach (string col in InterventionVM.Instance.columns)
+            {
+                if (col != "identifiant" && col != "date_intervention" && col != "identifiant_client")
+                    colNames.Add(col);
+            }
+
+            DataGridInterventionColumn.ItemsSource = colNames;
         }
 
         private async void DeleteCustomerColumn_Click(object sender, RoutedEventArgs e)

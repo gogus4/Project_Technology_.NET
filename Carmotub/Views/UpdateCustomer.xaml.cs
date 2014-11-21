@@ -24,9 +24,9 @@ namespace Carmotub.Views
             }
         }
 
-        public Customer CustomerToUpdate { get; set; }
+        public string CustomerToUpdate { get; set; }
 
-        public UpdateCustomer(Customer customer)
+        public UpdateCustomer(string customer)
         {
             InitializeComponent();
 
@@ -36,21 +36,21 @@ namespace Carmotub.Views
 
             RefreshDataGridInterventions();
 
-            Commentaire.Document.Blocks.Clear();
+            /*Commentaire.Document.Blocks.Clear();
             Commentaire.Document.Blocks.Add(new Paragraph(new Run(CustomerToUpdate.commentaire)));
 
-            ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == customer.identifiant);
+            ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == customer.identifiant);*/
         }
 
         public void RefreshDataGridInterventions()
         {
-            var list_interventions = InterventionVM.Instance.Interventions.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
-            DataGridInterventions.ItemsSource = list_interventions;
+            //var list_interventions = InterventionVM.Instance.Interventions.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
+            //DataGridInterventions.ItemsSource = list_interventions;
         }
 
         public void RefreshAndDeleteListBoxPhotoCustomer()
         {
-            ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
+            //ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
         }
 
         private async void UpdateCustomerButton_Click(object sender, RoutedEventArgs e)
@@ -110,16 +110,16 @@ namespace Carmotub.Views
                     string path = @"C:\Users\" + Environment.UserName + @"\Documents\Carmotub\Photos\" + openfile.SafeFileName;
                     File.Copy(openfile.FileName, path);
 
-                    if (await CustomerPhotoVM.Instance.AddPhoto(new CustomerPhoto() { identifiant_client = CustomerToUpdate.identifiant, uri = path }))
+                    /*if (await CustomerPhotoVM.Instance.AddPhoto(new CustomerPhoto() { identifiant_client = CustomerToUpdate.identifiant, uri = path }))
                     {
                         await CustomerPhotoVM.Instance.GetAllPhoto();
-                        ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
+                        //ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
                     }
 
                     else
                     {
                         MessageBox.Show("Une erreur est intervenue lors de l'ajout de la photo.");
-                    }
+                    }*/
                 }
             }
             catch (Exception E)
