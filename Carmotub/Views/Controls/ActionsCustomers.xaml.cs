@@ -1,21 +1,14 @@
-﻿using Carmotub.Model;
-using Carmotub.ViewModel;
+﻿using Carmotub.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Carmotub.Views.Controls
 {
@@ -84,7 +77,7 @@ namespace Carmotub.Views.Controls
             {
                 DataRow row = Table.NewRow();
 
-                foreach (KeyValuePair<string,string> keyValue in d)
+                foreach (KeyValuePair<string, string> keyValue in d)
                 {
                     row[keyValue.Key] = keyValue.Value;
                 }
@@ -159,14 +152,20 @@ namespace Carmotub.Views.Controls
             try
             {
                 DataRow customer = ((DataRowView)DataGridCustomers.SelectedItem).Row;
-                string essai = customer["prenom"].ToString();
 
-                // UpdateCustomer UpdateCustomer = new UpdateCustomer(customer);
-                // UpdateCustomer.Show();
+                if (customer != null)
+                {
+                    UpdateCustomer updateCustomer = new UpdateCustomer(customer);
+                    updateCustomer.Show();
+                }
+
+                else
+                    MessageBox.Show("Merci de selectionné un client pour pouvoir le modifier.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+
             }
             catch (Exception E)
             {
-                MessageBox.Show("Merci de selectionné un client avant de le modifier.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Merci de selectionné un client pour pouvoir le modifier.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

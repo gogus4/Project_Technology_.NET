@@ -10,9 +10,6 @@ namespace Carmotub.ViewModel
 {
     public class InterventionVM
     {
-        private ObservableCollection<Intervention> _interventions;
-        public ObservableCollection<Intervention> Interventions { get { return _interventions; } set { _interventions = value; } }
-
         public List<String> columns { get; set; }
 
         private static InterventionVM _instance = null;
@@ -29,7 +26,6 @@ namespace Carmotub.ViewModel
 
         public InterventionVM()
         {
-            _interventions = new ObservableCollection<Intervention>();
         }
 
         public async Task<bool> DeleteInterventionWithCustomer(string customer)
@@ -127,59 +123,28 @@ namespace Carmotub.ViewModel
             return true;
         }
 
-        public async Task<bool> GetAllIntervention()
+        public async Task<List<Dictionary<string, string>>> GetAllIntervention()
         {
-            /*int i = 0;
-            try
+            List<Dictionary<string, string>> interventions = new List<Dictionary<string, string>>();
+
+            string query = "SELECT * from interventions";
+            await SQLDataHelper.Instance.OpenConnection();
+            MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+            while (dataReader.Read())
             {
-                _interventions = new ObservableCollection<Intervention>();
+                Dictionary<string, string> intervention = new Dictionary<string, string>();
 
-                string query = "SELECT * FROM interventions";
-                await SQLDataHelper.Instance.OpenConnection();
-                MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                
-                while (dataReader.Read())
+                for (int i = 0; i < InterventionVM.Instance.columns.Count; i++)
                 {
-                    i++;
-                    double montant;
-                    bool result = Double.TryParse(dataReader["montant"].ToString().Replace(".",","), out montant);
-
-                    DateTime date_error = new DateTime(1900, 1, 1,0,0,0);
-
-                    if(dataReader["date_intervention"].ToString() != "")
-                    {
-                        date_error = Convert.ToDateTime(dataReader["date_intervention"].ToString());
-                    }
-
-                    int identifiant = int.Parse(dataReader["identifiant"].ToString());
-
-                    if (identifiant == 0)
-                        break;
-
-                    _interventions.Add(new Intervention()
-                        {
-                            carnet = dataReader["carnet"].ToString(),
-                            date_intervention = date_error,
-                            identifiant = identifiant,
-                            identifiant_client = int.Parse(dataReader["identifiant_client"].ToString()),
-                            montant = montant,
-                            nature = dataReader["nature"].ToString(),
-                            numero_cheque = dataReader["numero_cheque"].ToString(),
-                            type_chaudiere = dataReader["type_chaudiere"].ToString(),
-                            type_paiement = dataReader["type_paiement"].ToString(),
-                        });
+                    intervention.Add(InterventionVM.Instance.columns[i], dataReader[i].ToString());
                 }
 
-                return true;
+                interventions.Add(intervention);
             }
-            catch(Exception E)
-            {
-                int l = i;
-                return false;
-            }*/
 
-            return true;
+            return interventions;
         }
 
         public async Task GetColumns()
