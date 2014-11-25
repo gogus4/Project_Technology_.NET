@@ -49,7 +49,7 @@
                                             <Image Source="/Carmotub;component/Assets/edit.png" />
                                         </Button>
 
-                                        <Button Grid.Column="1" x:Name="DeleteCustomerColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="DeleteCustomerColumn_Click">
+                                        <Button Grid.Column="1" x:Name="DeleteInterventionColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="DeleteInterventionColumn_Click">
                                             <Image Source="/Carmotub;component/Assets/delete.png" Width="16" Height="16"/>
                                         </Button>
                                     </Grid>

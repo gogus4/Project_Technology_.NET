@@ -1,26 +1,11 @@
-﻿using Carmotub.Model;
-using Carmotub.ViewModel;
+﻿using Carmotub.ViewModel;
 using Carmotub.Views.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Carmotub.Views;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
-using System.Data.Entity;
-using Carmotub.Data;
 using System.Data;
 
 namespace Carmotub
@@ -74,26 +59,22 @@ namespace Carmotub
 
         private async void RemoveCustomer_Click(object sender, RoutedEventArgs e)
         {
-            /*var customer = (Customer)ActionsCustomers.Instance.DataGridCustomers.SelectedItem;
+            var customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
 
             if (customer != null)
             {
-                if (MessageBox.Show("Etes-vous sur de vouloir supprimer le client " + customer.nom + " " + customer.prenom, "Supprimer le client", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Etes-vous sur de vouloir supprimer le client " + customer["nom"].ToString() + " " + customer["prenom"].ToString(), "Supprimer le client", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    if (await CustomerVM.Instance.DeleteCustomer(customer) == true)
+                    if (await CustomerVM.Instance.DeleteCustomer(customer["identifiant"].ToString()) == true)
                     {
-                        ActionsCustomers.Instance.Customers.Add(customer);
                         await ActionsCustomers.Instance.Init();
                     }
 
-                    else
-                        MessageBox.Show("Une erreur est intervenue lors de la suppression du client.");
-
+                    else MessageBox.Show("Une erreur est intervenue lors de la suppression du client.");
                 }
             }
 
-            else
-                MessageBox.Show("Merci de selectionné un client avant de le supprimer.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);*/
+            else MessageBox.Show("Merci de selectionné un client avant de le supprimer.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void AddIntervention_Click(object sender, RoutedEventArgs e)
@@ -112,7 +93,7 @@ namespace Carmotub
                     MessageBox.Show("Merci de selectionné un client pour pouvoir affecté l'intervention à un client.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
-            catch (Exception E) 
+            catch (Exception E)
             {
                 MessageBox.Show("Merci de selectionné un client pour pouvoir affecté l'intervention à un client.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
             }

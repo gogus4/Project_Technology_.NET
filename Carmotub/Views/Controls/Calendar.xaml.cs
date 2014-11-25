@@ -1,6 +1,8 @@
 ﻿using Carmotub.Model;
 using Carmotub.ViewModel;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -123,19 +125,46 @@ namespace Carmotub.Views.Controls
 
         public async Task refreshCalendar()
         {
-            /*scheduler1.SelectedDate = CurrentDate;
+            List<Dictionary<string, string>> interventions = new List<Dictionary<string, string>>();
+            scheduler1.SelectedDate = CurrentDate;
             SelectMonth(CurrentDate.Month);
 
-            var interventions = InterventionVM.Instance.Interventions.Where(x => x.date_intervention.Month == CurrentDate.Month && x.date_intervention.Year == CurrentDate.Year);
+            //var interventions = InterventionVM.Instance.Interventions.Where(x => x.date_intervention.Month == CurrentDate.Month && x.date_intervention.Year == CurrentDate.Year);
+
+            // 05/10/1993
+
+            // LINQ
+            foreach (Dictionary<string, string> d in InterventionVM.Instance.Interventions)
+            {
+                foreach (KeyValuePair<string, string> keyValue in d)
+                {
+                    try
+                    {
+                        if (keyValue.Key == "date_intervention" && keyValue.Value.ToString().Substring(3, 2) == CurrentDate.Month.ToString() && keyValue.Value.ToString().Substring(6, 4) == CurrentDate.Year.ToString())
+                        {
+                            interventions.Add(d);
+                        }
+                    }
+                    catch (Exception E) { }
+                }
+            }
 
             foreach (var inter in interventions)
             {
-                var customer = ((Customer)ActionsCustomers.Instance.Customers.Where(x => x.identifiant == inter.identifiant_client).FirstOrDefault());
-                Event evenement = new Event() { Start = inter.date_intervention, End = inter.date_intervention, Color = new SolidColorBrush(Color.FromArgb(255, 205, 230, 247)), Subject = customer.nom + " " + customer.adresse };
+                //var customer = ((Customer)ActionsCustomers.Instance.Customers.Where(x => x.identifiant == inter.identifiant_client).FirstOrDefault());
 
-                if (scheduler1.Events.Where(x => x.Subject == customer.nom + " " + customer.adresse && x.Start == evenement.Start).FirstOrDefault() == null)
+                var test = inter["date_intervention"];
+
+                var year = int.Parse(inter["date_intervention"].ToString().Substring(6, 4));
+                var month = int.Parse(inter["date_intervention"].ToString().Substring(3, 2));
+                var day = int.Parse(inter["date_intervention"].ToString().Substring(0, 2));
+
+                DateTime date = new DateTime(year,month,day);
+                Event evenement = new Event() { Start = date, End = date, Color = new SolidColorBrush(Color.FromArgb(255, 205, 230, 247)), Subject = "toto" + " " + "titi" };
+
+                if (scheduler1.Events.Where(x => x.Subject == "toto" + " " + "toooi" && x.Start == evenement.Start).FirstOrDefault() == null)
                     scheduler1.Events.Add(evenement);
-            }*/
+            }
         }
 
         private async void RefreshCalendar_Click(object sender, RoutedEventArgs e)

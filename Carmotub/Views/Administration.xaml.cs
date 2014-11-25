@@ -51,13 +51,30 @@ namespace Carmotub.Views
 
                 else
                     System.Windows.Forms.MessageBox.Show("Une erreur est survenue lors de la suppression de la colonne.", "Erreur");
-
             }
         }
 
         private void EditCustomerColumn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private async void DeleteInterventionColumn_Click(object sender, RoutedEventArgs e)
+        {
+            string col_name = DataGridInterventionColumn.SelectedItem.ToString();
+
+            var dialogResult = System.Windows.Forms.MessageBox.Show(string.Format("Etes-vous sur de vouloir supprimer la colonne {0} ?", col_name), "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult.ToString() == "Yes")
+            {
+                if (await InterventionVM.Instance.DropColumnIntervention(col_name) == true)
+                {
+                    await ActionsCustomers.Instance.Init();
+                    InitColumnsName();
+                }
+
+                else
+                    System.Windows.Forms.MessageBox.Show("Une erreur est survenue lors de la suppression de la colonne.", "Erreur");
+            }
         }
     }
 }

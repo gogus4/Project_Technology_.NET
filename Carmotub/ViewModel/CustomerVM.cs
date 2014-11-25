@@ -1,12 +1,7 @@
 ﻿using Carmotub.Data;
-using Carmotub.Model;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Carmotub.ViewModel
@@ -49,27 +44,27 @@ namespace Carmotub.ViewModel
             return true;
         }
 
-        public async Task<bool> DeleteCustomer(string customer)
+        public async Task<bool> DeleteCustomer(string identifiant)
         {
-            /*try
+            try
             {
                 string query = "DELETE FROM clients WHERE identifiant = @identifiant";
 
-                await InterventionVM.Instance.DeleteInterventionWithCustomer(customer);
-                await CustomerPhotoVM.Instance.DeletePhotoWithCustomer(customer);
+                await InterventionVM.Instance.DeleteInterventionWithCustomer(identifiant);
+                await CustomerPhotoVM.Instance.DeletePhotoWithCustomer(identifiant);
 
                 await SQLDataHelper.Instance.OpenConnection();
 
                 MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
                 cmd.Prepare();
 
-                cmd.Parameters.Add("@identifiant", customer.identifiant);
+                cmd.Parameters.Add("@identifiant", identifiant);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception E)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }

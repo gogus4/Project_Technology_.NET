@@ -28,7 +28,7 @@ namespace Carmotub.ViewModel
         {
         }
 
-        public async Task<bool> DeletePhotoWithCustomer(DataRow customer)
+        public async Task<bool> DeletePhotoWithCustomer(string identifiant)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Carmotub.ViewModel
                 MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
                 cmd.Prepare();
 
-                cmd.Parameters.Add("@identifiant_client", customer["identifiant"].ToString());
+                cmd.Parameters.Add("@identifiant_client", identifiant);
                 cmd.ExecuteNonQuery();
 
                 await GetAllPhoto();

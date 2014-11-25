@@ -47,14 +47,7 @@ namespace Carmotub.Views
 
             RefreshDataGridInterventions();
             CreateGridDynamically();
-
-            var listPhoto = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == int.Parse(customer["identifiant"].ToString()));
-
-            if (listPhoto.Count() > 0)
-                ImageListbox.ItemsSource = listPhoto;
-
-            else
-                ListPhotos.Visibility = Visibility.Collapsed;
+            RefreshAndDeleteListBoxPhotoCustomer();
         }
 
         public async Task GetInterventions()
@@ -246,14 +239,20 @@ namespace Carmotub.Views
             UpdateCustomerGridRow.Children.Add(RichtextBoxGeneric1);
         }
 
-        public async void RefreshDataGridInterventions()
+        public async Task RefreshDataGridInterventions()
         {
             await GetInterventions();
         }
 
         public void RefreshAndDeleteListBoxPhotoCustomer()
         {
-            //ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
+            var listPhoto = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == int.Parse(CustomerToUpdate["identifiant"].ToString()));
+
+            if (listPhoto.Count() > 0)
+                ImageListbox.ItemsSource = listPhoto;
+
+            else
+                ListPhotos.Visibility = Visibility.Collapsed;
         }
 
         private async void UpdateCustomerButton_Click(object sender, RoutedEventArgs e)
@@ -270,7 +269,7 @@ namespace Carmotub.Views
             RichTextBox foundRichTextBox = UIHelper.Instance.FindChild<RichTextBox>(UpdateCustomerGridRow, "commentaire_textbox");
 
             foundRichTextBox.SelectAll();
-            query += "commentaire = '" + foundRichTextBox.Selection.Text.Replace(Environment.NewLine,"") + "'";
+            query += "commentaire = '" + foundRichTextBox.Selection.Text.Replace(Environment.NewLine, "") + "'";
             query += " where identifiant = " + CustomerToUpdate["identifiant"].ToString();
 
             if (await CustomerVM.Instance.UpdateCustomer(query) == true)
@@ -279,18 +278,23 @@ namespace Carmotub.Views
                 this.Close();
             }
 
-            else
-            {
-                MessageBox.Show("Une erreur est intervenue lors de la modification du client.", "Erreur client non modifié", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            else MessageBox.Show("Une erreur est intervenue lors de la modification du client.", "Erreur client non modifié", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void DataGridInterventions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var intervention = (Intervention)DataGridInterventions.SelectedItem;
+            try
+            {
+                DataRow intervention = ((DataRowView)DataGridInterventions.SelectedItem).Row;
 
-            UpdateIntervention updateIntervention = new UpdateIntervention(intervention);
-            updateIntervention.Show();
+                if (intervention != null)
+                {
+                    UpdateIntervention updateIntervention = new UpdateIntervention(intervention);
+                    updateIntervention.Show();
+                }
+
+            }
+            catch (Exception E) { }
         }
 
         private async void AddPhoto_Click(object sender, RoutedEventArgs e)

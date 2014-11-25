@@ -1,14 +1,7 @@
 ﻿using Carmotub.Data;
-using Carmotub.Model;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace Carmotub.ViewModel
 {
@@ -31,7 +24,7 @@ namespace Carmotub.ViewModel
 
         public async Task<bool> AddBackupDatabase(DateTime newDatetime)
         {
-            /*try
+            try
             {
                 string query = "INSERT INTO backup_database(date) VALUES(@date)";
                 await SQLDataHelper.Instance.OpenConnection();
@@ -46,7 +39,7 @@ namespace Carmotub.ViewModel
             catch (Exception E)
             {
                 return false;
-            }*/
+            }
 
             return true;
         }
@@ -56,7 +49,7 @@ namespace Carmotub.ViewModel
             try
             {
                 string query = "SELECT * FROM `backup_database` order by date desc LIMIT 1";
-                
+
                 await SQLDataHelper.Instance.OpenConnection();
                 MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();

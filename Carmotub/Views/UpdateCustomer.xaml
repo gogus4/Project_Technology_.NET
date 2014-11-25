@@ -64,15 +64,7 @@
 
         <TextBlock Text="Liste des interventions : " FontFamily="Segoe UI Light" Grid.Row="3" Grid.ColumnSpan="4" Margin="5,0,0,0"/>
 
-        <DataGrid x:Name="DataGridInterventions" ItemsSource="{Binding Interventions}" Grid.Row="4" Grid.ColumnSpan="4" Margin="5,0,5,0" FontFamily="Segoe UI Light" Background="White" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" MouseDoubleClick="DataGridInterventions_MouseDoubleClick">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding date}" />
-                <DataGridTextColumn Header="Type de chaudière" Binding="{Binding type_chaudiere}" />
-                <DataGridTextColumn Header="Carnet" Binding="{Binding carnet}" />
-                <DataGridTextColumn Header="Nature" Binding="{Binding nature}" />
-                <DataGridTextColumn Header="Montant" Binding="{Binding montant}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid x:Name="DataGridInterventions" ColumnWidth="*" Grid.Row="4" Grid.ColumnSpan="4" Margin="5,0,5,0" FontFamily="Segoe UI Light" Background="White" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" MouseDoubleClick="DataGridInterventions_MouseDoubleClick"/>
 
         <StackPanel Orientation="Horizontal" Margin="5,5,0,5" Grid.Row="5" Grid.ColumnSpan="4">
             <Button x:Name="UpdateCustomerButton"  Content="Modifier le client" FontFamily="Segoe UI Light" FontSize="12" Width="120" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="UpdateCustomerButton_Click"/>
