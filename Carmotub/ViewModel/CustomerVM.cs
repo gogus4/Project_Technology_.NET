@@ -8,6 +8,8 @@ namespace Carmotub.ViewModel
 {
     public class CustomerVM
     {
+        public List<Dictionary<string, string>> Customers { get; set; }
+
         private static CustomerVM _instance = null;
         public static CustomerVM Instance
         {
@@ -30,6 +32,25 @@ namespace Carmotub.ViewModel
             try
             {
                 string query = string.Format("ALTER TABLE clients DROP COLUMN {0}", column);
+
+                await SQLDataHelper.Instance.OpenConnection();
+
+                MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception E)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> AddColumnCustomer(string column)
+        {
+            try
+            {
+                string query = string.Format("ALTER TABLE clients ADD {0} VARCHAR(255)", column);
 
                 await SQLDataHelper.Instance.OpenConnection();
 
@@ -103,9 +124,9 @@ namespace Carmotub.ViewModel
             return true;
         }
 
-        public async Task<List<Dictionary<string, string>>> GetAllCustomer()
+        public async Task GetAllCustomer()
         {
-            List<Dictionary<string, string>> customers = new List<Dictionary<string, string>>();
+            Customers = new List<Dictionary<string, string>>();
 
             string query = "SELECT * from clients";
             await SQLDataHelper.Instance.OpenConnection();
@@ -119,10 +140,8 @@ namespace Carmotub.ViewModel
                 {
                     customer.Add(CustomerVM.Instance.columns[i], dataReader[i].ToString());
                 }
-                customers.Add(customer);
+                Customers.Add(customer);
             }
-
-            return customers;
         }
 
         public async Task GetColumns()

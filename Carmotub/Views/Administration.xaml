@@ -5,59 +5,49 @@
     <Grid>
         <TabControl Name="ListTables">
             <TabItem Header="Client">
-                <DataGrid x:Name="DataGridCustomerColumn" FontFamily="Segoe UI Light" Background="White" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="0.8*" Header="Nom de la colonne" Binding="{Binding}"/>
-                        <DataGridTemplateColumn Width="0.2*" TextBlock.TextAlignment="Center" Header="Actions">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid HorizontalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="AddFieldCustomer" Content="Ajouter un champ" FontFamily="Segoe UI Light" HorizontalAlignment="Right" Margin="5,5,0,5" Padding="5" FontSize="12" Click="AddFieldCustomer_Click"/>
 
-                                        <Button Grid.Column="0" x:Name="EditCustomerColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="EditCustomerColumn_Click">
-                                            <Image Source="/Carmotub;component/Assets/edit.png" />
-                                        </Button>
-
-                                        <Button Grid.Column="1" x:Name="DeleteCustomerColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="DeleteCustomerColumn_Click">
-                                            <Image Source="/Carmotub;component/Assets/delete.png" Width="16" Height="16"/>
-                                        </Button>
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <DataGrid x:Name="DataGridCustomerColumn" FontFamily="Segoe UI Light" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="0.8*" Header="Nom de la colonne" Binding="{Binding}"/>
+                            <DataGridTemplateColumn Width="0.2*" TextBlock.TextAlignment="Center" Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Center">
+                                            <Button x:Name="DeleteCustomerColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="DeleteCustomerColumn_Click">
+                                                <Image Source="/Carmotub;component/Assets/delete.png" Width="16" Height="16"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
             </TabItem>
 
             <TabItem Header="Intervention">
-                <DataGrid x:Name="DataGridInterventionColumn" FontFamily="Segoe UI Light" Background="White" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="0.8*" Header="Nom de la colonne" Binding="{Binding}"/>
-                        <DataGridTemplateColumn Width="0.2*" TextBlock.TextAlignment="Center" Header="Actions">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid HorizontalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="AddFieldIntervention" Content="Ajouter un champ" FontFamily="Segoe UI Light" HorizontalAlignment="Right" Margin="5,5,0,5" Padding="5" FontSize="12" Click="AddFieldIntervention_Click"/>
 
-                                        <Button Grid.Column="0" x:Name="EditCustomerColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="EditCustomerColumn_Click">
-                                            <Image Source="/Carmotub;component/Assets/edit.png" />
-                                        </Button>
-
-                                        <Button Grid.Column="1" x:Name="DeleteInterventionColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="DeleteInterventionColumn_Click">
-                                            <Image Source="/Carmotub;component/Assets/delete.png" Width="16" Height="16"/>
-                                        </Button>
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <DataGrid x:Name="DataGridInterventionColumn" FontFamily="Segoe UI Light" Background="White" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserDeleteRows="False" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="0.8*" Header="Nom de la colonne" Binding="{Binding}"/>
+                            <DataGridTemplateColumn Width="0.2*" TextBlock.TextAlignment="Center" Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Center">
+                                            <Button x:Name="DeleteInterventionColumn" Tag="{Binding}" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="DeleteInterventionColumn_Click">
+                                                <Image Source="/Carmotub;component/Assets/delete.png" Width="16" Height="16"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>

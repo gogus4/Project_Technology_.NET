@@ -111,6 +111,25 @@ namespace Carmotub.ViewModel
             return true;
         }
 
+        public async Task<bool> AddColumnIntervention(string column)
+        {
+            try
+            {
+                string query = string.Format("ALTER TABLE interventions ADD {0} VARCHAR(255)", column);
+
+                await SQLDataHelper.Instance.OpenConnection();
+
+                MySqlCommand cmd = new MySqlCommand(query, SQLDataHelper.Instance.Connection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception E)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<List<Dictionary<string, string>>> GetAllIntervention()
         {
             Interventions = new List<Dictionary<string, string>>();

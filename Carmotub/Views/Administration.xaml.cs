@@ -1,4 +1,5 @@
-﻿using Carmotub.ViewModel;
+﻿using Carmotub.Data;
+using Carmotub.ViewModel;
 using Carmotub.Views.Controls;
 using System.Collections.Generic;
 using System.Windows;
@@ -11,6 +12,7 @@ namespace Carmotub.Views
         public Administration()
         {
             InitializeComponent();
+
             InitColumnsName();
         }
 
@@ -54,11 +56,6 @@ namespace Carmotub.Views
             }
         }
 
-        private void EditCustomerColumn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private async void DeleteInterventionColumn_Click(object sender, RoutedEventArgs e)
         {
             string col_name = DataGridInterventionColumn.SelectedItem.ToString();
@@ -74,6 +71,42 @@ namespace Carmotub.Views
 
                 else
                     System.Windows.Forms.MessageBox.Show("Une erreur est survenue lors de la suppression de la colonne.", "Erreur");
+            }
+        }
+
+        private async void AddFieldCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            string libelle = "";
+            UIHelper.InputBox("Ajouter une colonne", "Saisir le libelle : ", ref libelle);
+
+            if (libelle != "")
+            {
+                if (await CustomerVM.Instance.AddColumnCustomer(libelle) == true)
+                {
+                    await ActionsCustomers.Instance.Init();
+                    InitColumnsName();
+                }
+
+                else
+                    System.Windows.Forms.MessageBox.Show("Une erreur est survenue lors de l'ajout de la colonne.", "Erreur");
+            }
+        }
+
+        private async void AddFieldIntervention_Click(object sender, RoutedEventArgs e)
+        {
+            string libelle = "";
+            UIHelper.InputBox("Ajouter une colonne", "Saisir le libelle : ", ref libelle);
+
+            if (libelle != "")
+            {
+                if (await InterventionVM.Instance.AddColumnIntervention(libelle) == true)
+                {
+                    await ActionsCustomers.Instance.Init();
+                    InitColumnsName();
+                }
+
+                else
+                    System.Windows.Forms.MessageBox.Show("Une erreur est survenue lors de l'ajout de la colonne.", "Erreur");
             }
         }
     }

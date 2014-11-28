@@ -57,14 +57,14 @@ namespace Carmotub.Views.Controls
 
             await CustomerPhotoVM.Instance.GetAllPhoto();
 
-            List<Dictionary<string, string>> listCustomers = await CustomerVM.Instance.GetAllCustomer();
+            await CustomerVM.Instance.GetAllCustomer();
 
-            if (listCustomers != null)
-                NumberCustomers.Text = listCustomers.Count().ToString();
+            if (CustomerVM.Instance.Customers != null)
+                NumberCustomers.Text = CustomerVM.Instance.Customers.Count().ToString();
 
             DataGridCustomers.Columns.Clear();
 
-            foreach (Dictionary<string, string> d in listCustomers)
+            foreach (Dictionary<string, string> d in CustomerVM.Instance.Customers)
             {
                 foreach (string key in d.Keys)
                 {
@@ -73,7 +73,7 @@ namespace Carmotub.Views.Controls
                 break;
             }
 
-            foreach (Dictionary<string, string> d in listCustomers)
+            foreach (Dictionary<string, string> d in CustomerVM.Instance.Customers)
             {
                 DataRow row = Table.NewRow();
 

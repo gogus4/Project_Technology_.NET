@@ -1,8 +1,6 @@
-﻿using Carmotub.Model;
-using Carmotub.ViewModel;
+﻿using Carmotub.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -129,8 +127,6 @@ namespace Carmotub.Views.Controls
             scheduler1.SelectedDate = CurrentDate;
             SelectMonth(CurrentDate.Month);
 
-            //var interventions = InterventionVM.Instance.Interventions.Where(x => x.date_intervention.Month == CurrentDate.Month && x.date_intervention.Year == CurrentDate.Year);
-
             // 05/10/1993
 
             // LINQ
@@ -149,20 +145,35 @@ namespace Carmotub.Views.Controls
                 }
             }
 
+            Dictionary<string, string> customer = new Dictionary<string, string>();
+
             foreach (var inter in interventions)
             {
-                //var customer = ((Customer)ActionsCustomers.Instance.Customers.Where(x => x.identifiant == inter.identifiant_client).FirstOrDefault());
-
-                var test = inter["date_intervention"];
+                // LINQ
+                foreach (Dictionary<string, string> d in CustomerVM.Instance.Customers)
+                {
+                    foreach (KeyValuePair<string, string> keyValue in d)
+                    {
+                        try
+                        {
+                            if (keyValue.Key == "identifiant" && keyValue.Value.ToString() == inter["identifiant_client"])
+                            {
+                                customer = d;
+                                continue;
+                            }
+                        }
+                        catch (Exception E) { }
+                    }
+                }
 
                 var year = int.Parse(inter["date_intervention"].ToString().Substring(6, 4));
                 var month = int.Parse(inter["date_intervention"].ToString().Substring(3, 2));
                 var day = int.Parse(inter["date_intervention"].ToString().Substring(0, 2));
 
-                DateTime date = new DateTime(year,month,day);
-                Event evenement = new Event() { Start = date, End = date, Color = new SolidColorBrush(Color.FromArgb(255, 205, 230, 247)), Subject = "toto" + " " + "titi" };
+                DateTime date = new DateTime(year, month, day);
+                Event evenement = new Event() { Start = date, End = date, Color = new SolidColorBrush(Color.FromArgb(255, 205, 230, 247)), Subject = customer["nom"] + " " + customer["adresse"] };
 
-                if (scheduler1.Events.Where(x => x.Subject == "toto" + " " + "toooi" && x.Start == evenement.Start).FirstOrDefault() == null)
+                if (scheduler1.Events.Where(x => x.Subject == customer["nom"] + " " + customer["adresse"] && x.Start == evenement.Start).FirstOrDefault() == null)
                     scheduler1.Events.Add(evenement);
             }
         }
