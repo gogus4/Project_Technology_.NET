@@ -127,7 +127,7 @@ namespace Carmotub.Views.Controls
             scheduler1.SelectedDate = CurrentDate;
             SelectMonth(CurrentDate.Month);
 
-            // 05/10/1993
+            await InterventionVM.Instance.GetAllIntervention();
 
             // LINQ
             foreach (Dictionary<string, string> d in InterventionVM.Instance.Interventions)

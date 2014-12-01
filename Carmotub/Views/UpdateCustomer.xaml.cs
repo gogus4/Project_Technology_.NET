@@ -200,6 +200,8 @@ namespace Carmotub.Views
                         Grid.SetColumn(textBoxGeneric, 1);
                         Grid.SetRow(textBoxGeneric, nbRow);
 
+                        nbRow++;
+
                         UpdateCustomerGridRow.Children.Add(textBlockGeneric);
                         UpdateCustomerGridRow.Children.Add(textBoxGeneric);
                     }
@@ -249,10 +251,12 @@ namespace Carmotub.Views
             var listPhoto = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == int.Parse(CustomerToUpdate["identifiant"].ToString()));
 
             if (listPhoto.Count() > 0)
+            {
                 ImageListbox.ItemsSource = listPhoto;
+                ListPhotos.Visibility = Visibility.Visible;
+            }
 
-            else
-                ListPhotos.Visibility = Visibility.Collapsed;
+            else ListPhotos.Visibility = Visibility.Collapsed;
         }
 
         private async void UpdateCustomerButton_Click(object sender, RoutedEventArgs e)
@@ -262,7 +266,6 @@ namespace Carmotub.Views
             foreach (string col in colNames)
             {
                 TextBox foundTextBox = UIHelper.Instance.FindChild<TextBox>(UpdateCustomerGridRow, col + "_textbox");
-
                 query += @"" + col + " = '" + foundTextBox.Text + "',";
             }
 
@@ -283,18 +286,13 @@ namespace Carmotub.Views
 
         private void DataGridInterventions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
+            DataRow intervention = ((DataRowView)DataGridInterventions.SelectedItem).Row == null ? null : ((DataRowView)DataGridInterventions.SelectedItem).Row;
+
+            if (intervention != null)
             {
-                DataRow intervention = ((DataRowView)DataGridInterventions.SelectedItem).Row;
-
-                if (intervention != null)
-                {
-                    UpdateIntervention updateIntervention = new UpdateIntervention(intervention);
-                    updateIntervention.Show();
-                }
-
+                UpdateIntervention updateIntervention = new UpdateIntervention(intervention);
+                updateIntervention.Show();
             }
-            catch (Exception E) { }
         }
 
         private async void AddPhoto_Click(object sender, RoutedEventArgs e)
@@ -310,16 +308,13 @@ namespace Carmotub.Views
                     string path = @"C:\Users\" + Environment.UserName + @"\Documents\Carmotub\Photos\" + openfile.SafeFileName;
                     File.Copy(openfile.FileName, path);
 
-                    /*if (await CustomerPhotoVM.Instance.AddPhoto(new CustomerPhoto() { identifiant_client = CustomerToUpdate.identifiant, uri = path }))
+                    if (await CustomerPhotoVM.Instance.AddPhoto(new CustomerPhoto() { identifiant_client = int.Parse(CustomerToUpdate["identifiant"].ToString()), uri = path }))
                     {
                         await CustomerPhotoVM.Instance.GetAllPhoto();
-                        //ImageListbox.ItemsSource = CustomerPhotoVM.Instance.Photos.Where(x => x.identifiant_client == CustomerToUpdate.identifiant);
+                        RefreshAndDeleteListBoxPhotoCustomer();
                     }
 
-                    else
-                    {
-                        MessageBox.Show("Une erreur est intervenue lors de l'ajout de la photo.");
-                    }*/
+                    else MessageBox.Show("Une erreur est intervenue lors de l'ajout de la photo.");
                 }
             }
             catch (Exception E)

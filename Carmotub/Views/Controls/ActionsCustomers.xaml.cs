@@ -149,24 +149,16 @@ namespace Carmotub.Views.Controls
 
         private void DataGridCustomers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
+            DataRow customer = ((DataRowView)DataGridCustomers.SelectedItem).Row == null ? null : ((DataRowView)DataGridCustomers.SelectedItem).Row;
+
+            if (customer != null)
             {
-                DataRow customer = ((DataRowView)DataGridCustomers.SelectedItem).Row;
-
-                if (customer != null)
-                {
-                    UpdateCustomer updateCustomer = new UpdateCustomer(customer);
-                    updateCustomer.Show();
-                }
-
-                else
-                    MessageBox.Show("Merci de selectionné un client pour pouvoir le modifier.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                UpdateCustomer updateCustomer = new UpdateCustomer(customer);
+                updateCustomer.Show();
             }
-            catch (Exception E)
-            {
+
+            else
                 MessageBox.Show("Merci de selectionné un client pour pouvoir le modifier.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
         private void SearchBy_SelectionChanged(object sender, SelectionChangedEventArgs e)

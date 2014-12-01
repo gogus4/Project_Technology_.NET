@@ -112,6 +112,8 @@ namespace Carmotub.Views
                         Grid.SetColumn(textBoxGeneric, 1);
                         Grid.SetRow(textBoxGeneric, nbRow);
 
+                        nbRow++;
+
                         AddCustomerGridRow.Children.Add(textBlockGeneric);
                         AddCustomerGridRow.Children.Add(textBoxGeneric);
                     }
@@ -170,15 +172,12 @@ namespace Carmotub.Views
             foundRichTextBox.SelectAll();
             query += "'" + foundRichTextBox.Selection.Text + "')";
 
-            if(await CustomerVM.Instance.AddCustomer(query) == true)
+            if (await CustomerVM.Instance.AddCustomer(query) == true)
             {
                 await ActionsCustomers.Instance.Init();
             }
 
-            else
-            {
-                MessageBox.Show("Une erreur est intervenue lors de l'ajout du client.", "Erreur client non ajouté", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            else MessageBox.Show("Une erreur est intervenue lors de l'ajout du client.", "Erreur client non ajouté", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

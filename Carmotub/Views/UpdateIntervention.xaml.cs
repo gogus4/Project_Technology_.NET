@@ -114,6 +114,8 @@ namespace Carmotub.Views
                         Grid.SetColumn(textBoxGeneric, 1);
                         Grid.SetRow(textBoxGeneric, nbRow);
 
+                        nbRow++;
+
                         UpdateInterventionGridRow.Children.Add(textBlockGeneric);
                         UpdateInterventionGridRow.Children.Add(textBoxGeneric);
                     }

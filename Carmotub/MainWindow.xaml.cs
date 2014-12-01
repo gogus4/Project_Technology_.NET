@@ -59,7 +59,7 @@ namespace Carmotub
 
         private async void RemoveCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
+            var customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row == null ? null : ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
 
             if (customer != null)
             {
@@ -79,24 +79,16 @@ namespace Carmotub
 
         private void AddIntervention_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row == null ? null : ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
+
+            if (customer != null)
             {
-                DataRow customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
-
-                if (customer != null)
-                {
-                    AddIntervention addIntervention = new AddIntervention(customer);
-                    addIntervention.Show();
-                }
-
-                else
-                    MessageBox.Show("Merci de selectionné un client pour pouvoir affecté l'intervention à un client.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                AddIntervention addIntervention = new AddIntervention(customer);
+                addIntervention.Show();
             }
-            catch (Exception E)
-            {
+
+            else
                 MessageBox.Show("Merci de selectionné un client pour pouvoir affecté l'intervention à un client.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
         private async void StartBackupDatabase()

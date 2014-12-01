@@ -118,6 +118,8 @@ namespace Carmotub.Views
                         Grid.SetColumn(textBoxGeneric, 1);
                         Grid.SetRow(textBoxGeneric, nbRow);
 
+                        nbRow++;
+
                         AddInterventionGridRow.Children.Add(textBlockGeneric);
                         AddInterventionGridRow.Children.Add(textBoxGeneric);
                     }
@@ -152,7 +154,6 @@ namespace Carmotub.Views
             foreach (string col in colNames)
             {
                 TextBox foundTextBox = UIHelper.Instance.FindChild<TextBox>(AddInterventionGridRow, col + "_textbox");
-
                 query += @"'" + foundTextBox.Text + "',";
             }
 
@@ -162,45 +163,10 @@ namespace Carmotub.Views
             if (await InterventionVM.Instance.AddIntervention(query) == true)
             {
                 await ActionsCustomers.Instance.Init();
+                this.Close();
             }
 
-            else
-            {
-                MessageBox.Show("Une erreur est intervenue lors de l'ajout de l'intervention.", "Erreur intervention non ajoutée", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        private async void AddInterventionButton_Click12(object sender, RoutedEventArgs e)
-        {
-            /*try
-            {
-                double montant;
-                bool result = Double.TryParse(Montant.Text.Replace(".", ","), out montant);
-
-                Intervention intervention = new Intervention()
-                {
-                    carnet = Carnet.Text,
-                    date_intervention = Convert.ToDateTime(DateIntervention.Text),
-                    identifiant_client = Customer.identifiant,
-                    montant = montant,
-                    nature = Nature.Text,
-                    numero_cheque = NumeroCheque.Text,
-                    type_chaudiere = TypeChaudiere.Text,
-                    type_paiement = TypePaiement.Text
-                };
-
-                if (await InterventionVM.Instance.AddIntervention(intervention) == true)
-                    this.Close();
-
-                else
-                {
-                    MessageBox.Show("Une erreur est intervenue lors de l'ajout de l'intervention.");
-                }
-            }
-            catch (Exception E)
-            {
-                MessageBox.Show("Une erreur est intervenue lors de l'ajout de l'intervention.");
-            }*/
+            else MessageBox.Show("Une erreur est intervenue lors de l'ajout de l'intervention.", "Erreur intervention non ajoutée", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }
