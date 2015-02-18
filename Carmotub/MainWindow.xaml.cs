@@ -13,12 +13,14 @@ namespace Carmotub
     public partial class MainWindow : Window
     {
         StreamWriter OutputStream;
+        private string valuePourcent;
 
         public MainWindow()
         {
             InitializeComponent();
+            valuePourcent = "";
 
-            GetLastDateTimeBackup();
+            // GetLastDateTimeBackup();
         }
 
         private async void GetLastDateTimeBackup()
@@ -59,10 +61,10 @@ namespace Carmotub
 
         private async void RemoveCustomer_Click(object sender, RoutedEventArgs e)
         {
-            var customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row == null ? null : ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
-
-            if (customer != null)
+            try
             {
+                var customer = ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row == null ? null : ((DataRowView)ActionsCustomers.Instance.DataGridCustomers.SelectedItem).Row;
+
                 if (MessageBox.Show("Etes-vous sur de vouloir supprimer le client " + customer["nom"].ToString() + " " + customer["prenom"].ToString(), "Supprimer le client", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     if (await CustomerVM.Instance.DeleteCustomer(customer["identifiant"].ToString()) == true)
@@ -73,8 +75,10 @@ namespace Carmotub
                     else MessageBox.Show("Une erreur est intervenue lors de la suppression du client.");
                 }
             }
-
-            else MessageBox.Show("Merci de selectionné un client avant de le supprimer.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+            catch (Exception E)
+            {
+                MessageBox.Show("Merci de selectionné un client avant de le supprimer.", "Aucun client selectionné", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void AddIntervention_Click(object sender, RoutedEventArgs e)
@@ -95,7 +99,7 @@ namespace Carmotub
         {
             GridTransparentLoading.Visibility = Visibility.Visible;
             ProgressBarLoadingBackupDatabase.Visibility = Visibility.Visible;
-
+            valuePourcent = "";
             CreateBackup();
         }
 
@@ -106,23 +110,26 @@ namespace Carmotub
 
         private async void OnDataReceived(object Sender, System.Diagnostics.DataReceivedEventArgs e)
         {
+
             Dispatcher.Invoke((Action)(() => ProgressBackupDatabase.Value += 1));
             Dispatcher.Invoke((Action)(() => PourcentProgressBar.Text = Math.Round((ProgressBackupDatabase.Value * 100) / 128, 0).ToString() + "%"));
+            Dispatcher.Invoke((Action)(() => valuePourcent = PourcentProgressBar.Text));
+
 
             if (e.Data != null)
             {
-                OutputStream.WriteLine(e.Data);
-            }
+                if (valuePourcent == "80%")
+                {
+                    Dispatcher.Invoke((Action)(() => GridTransparentLoading.Visibility = Visibility.Collapsed));
+                    Dispatcher.Invoke((Action)(() => ProgressBarLoadingBackupDatabase.Visibility = Visibility.Collapsed));
 
-            else
-            {
-                Dispatcher.Invoke((Action)(() => GridTransparentLoading.Visibility = Visibility.Collapsed));
-                Dispatcher.Invoke((Action)(() => ProgressBarLoadingBackupDatabase.Visibility = Visibility.Collapsed));
+                    await BackupDatabaseVM.Instance.AddBackupDatabase(DateTime.Now);
 
-                await BackupDatabaseVM.Instance.AddBackupDatabase(DateTime.Now);
+                    OutputStream.Flush();
+                    OutputStream.Close();
 
-                OutputStream.Flush();
-                OutputStream.Close();
+                    return;
+                }
             }
         }
 
@@ -135,7 +142,7 @@ namespace Carmotub
 
             string cmd = String.Format("-u{0} --opt --databases {1}", user, dbnm);
 
-            string filePath = ConfigurationManager.AppSettings["PathUsbDatabase"] + @"\db" + DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + ".sql";
+            string filePath = ConfigurationManager.AppSettings["PathUsbDatabase"] + @"\db" + DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + "." + DateTime.Now.Second + "." + DateTime.Now.Minute + ".sql";
             OutputStream = new StreamWriter(filePath);
 
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -157,12 +164,6 @@ namespace Carmotub
 
             proc.BeginOutputReadLine();
             proc.Close();
-        }
-
-        private void PrintCustomers_Click(object sender, RoutedEventArgs e)
-        {
-            PrintCustomers printCustomers = new PrintCustomers();
-            printCustomers.Show();
         }
 
         private void Configuration_Click(object sender, RoutedEventArgs e)

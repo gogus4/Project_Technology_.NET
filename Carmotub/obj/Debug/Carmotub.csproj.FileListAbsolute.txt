@@ -42,7 +42,6 @@ C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\bin\Debug\Entit
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\bin\Debug\fr\EntityFramework.resources.dll
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\Administration.baml
-C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\PrintCustomers.baml
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\PopupPhotoCustomer.baml
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\Settings.baml
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\UpdateIntervention.baml
@@ -53,7 +52,6 @@ C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\UpdateCustomer.baml
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\MainWindow.g.cs
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\Administration.g.cs
-C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\PrintCustomers.g.cs
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\PopupPhotoCustomer.g.cs
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\Settings.g.cs
 C:\Users\Diego\Documents\GitHub\Project_Technology_.NET\Carmotub\obj\Debug\Views\UpdateIntervention.g.cs

@@ -82,9 +82,6 @@
     <Compile Include="Views\Administration.xaml.cs">
       <DependentUpon>Administration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PrintCustomers.xaml.cs">
-      <DependentUpon>PrintCustomers.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PopupPhotoCustomer.xaml.cs">
       <DependentUpon>PopupPhotoCustomer.xaml</DependentUpon>
     </Compile>
@@ -124,10 +121,6 @@
     <Page Include="Views\Administration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PrintCustomers.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PopupPhotoCustomer.xaml">
       <SubType>Designer</SubType>

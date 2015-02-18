@@ -22,7 +22,7 @@ namespace Carmotub.Views
 
             foreach (string col in CustomerVM.Instance.columns)
             {
-                if (col != "identifiant" && col != "commentaire")
+                if (col != "identifiant" && col != "commentaire" && col != "nom" && col != "prenom" && col != "adresse")
                     colNames.Add(col);
             }
 

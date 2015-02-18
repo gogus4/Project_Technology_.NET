@@ -540,7 +540,6 @@
                     <RibbonButton x:Name="AddCustomer" VerticalAlignment="Top" LargeImageSource="Assets/Ribbon/add_customer.png" Label="Nouveau client" Click="AddCustomer_Click"/>
                     <RibbonButton x:Name="RemoveCustomer" VerticalAlignment="Top" LargeImageSource="Assets/Ribbon/remove_customer.png" Label="Supprimer le client" Click="RemoveCustomer_Click"/>
                     <RibbonButton x:Name="AddIntervention" VerticalAlignment="Top" LargeImageSource="Assets/Ribbon/add_intervention.png" Label="Nouvelle intervention" Click="AddIntervention_Click"/>
-                    <RibbonButton x:Name="PrintCustomers" VerticalAlignment="Top" LargeImageSource="Assets/Ribbon/print.png" Label="Imprimer" Click="PrintCustomers_Click"/>
                     <RibbonButton x:Name="BackupDatabase" VerticalAlignment="Top" LargeImageSource="Assets/Ribbon/backup_database.png" Label="Sauvegarde" Click="BackupDatabase_Click"/>
                 </RibbonGroup>
 

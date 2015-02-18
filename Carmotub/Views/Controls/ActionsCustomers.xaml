@@ -20,16 +20,8 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
             <TextBlock Text="Rechercher par :" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Light"/>
 
-            <ComboBox x:Name="SearchBy" Margin="5,0,0,0" VerticalAlignment="Center" Height="20" SelectedIndex="0" Width="160" BorderBrush="LightGray" FontSize="12" FontFamily="Segoe UI Light" SelectionChanged="SearchBy_SelectionChanged">
+            <ComboBox x:Name="SearchBy" Margin="5,0,0,0" VerticalAlignment="Center" Height="20" SelectedIndex="0" Width="160" BorderBrush="LightGray" FontSize="12" FontFamily="Segoe UI Light">
                 <ComboBoxItem>Nom</ComboBoxItem>
-                <ComboBoxItem>Adresse</ComboBoxItem>
-                <ComboBoxItem>Code Postal</ComboBoxItem>
-                <ComboBoxItem>Numéro de téléphone fixe</ComboBoxItem>
-                <ComboBoxItem>Numéro de téléphone portable</ComboBoxItem>
-                <ComboBoxItem>Rendez-vous</ComboBoxItem>
-                <ComboBoxItem>Nombre d'interventions</ComboBoxItem>
-                <ComboBoxItem>Date</ComboBoxItem>
-                <ComboBoxItem>Mois</ComboBoxItem>
             </ComboBox>
 
             <Border x:Name="SearchBorder" Margin="10,0,0,0" Height="20" BorderBrush="LightGray" Visibility="Visible" BorderThickness="1" Background="White">
@@ -42,48 +34,6 @@
                     </Button>
                 </StackPanel>
             </Border>
-
-            <DatePicker x:Name="SelectDateIntervention" Visibility="Collapsed" BorderBrush="LightGray" Margin="10,0,0,0" HorizontalAlignment="Left" FontFamily="Segoe UI Light" Width="200" SelectedDateChanged="SelectDateIntervention_SelectedDateChanged"/>
-
-            <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="SearchMonthInterventionStackPanel">
-                <ComboBox x:Name="SearchByMonthIntervention" Height="20" Margin="10,0,0,0" VerticalAlignment="Center" SelectedIndex="0" Width="100" BorderBrush="LightGray" FontSize="12" FontFamily="Segoe UI Light" SelectionChanged="SearchBy_SelectionChanged">
-                    <ComboBoxItem>Janvier</ComboBoxItem>
-                    <ComboBoxItem>Fevrier</ComboBoxItem>
-                    <ComboBoxItem>Mars</ComboBoxItem>
-                    <ComboBoxItem>Avril</ComboBoxItem>
-                    <ComboBoxItem>Mai</ComboBoxItem>
-                    <ComboBoxItem>Juin</ComboBoxItem>
-                    <ComboBoxItem>Juillet</ComboBoxItem>
-                    <ComboBoxItem>Aout</ComboBoxItem>
-                    <ComboBoxItem>Septembre</ComboBoxItem>
-                    <ComboBoxItem>Octobre</ComboBoxItem>
-                    <ComboBoxItem>Novembre</ComboBoxItem>
-                    <ComboBoxItem>Decembre</ComboBoxItem>
-                </ComboBox>
-
-                <Button x:Name="ValidSearchByMonth" FontSize="12" Content="Valider" Margin="5,0,0,0" Width="60" Height="21" BorderBrush="LightGray" FontFamily="Segoe UI Light" Click="ValidSearchByMonth_Click"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="SearchByNumberIntervention">
-                <ComboBox x:Name="NumberIntervention" Height="20" Margin="10,0,0,0" VerticalAlignment="Center" SelectedIndex="0" Width="100" BorderBrush="LightGray" FontSize="12" FontFamily="Segoe UI Light" SelectionChanged="SearchBy_SelectionChanged">
-                    <ComboBoxItem>0</ComboBoxItem>
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
-                    <ComboBoxItem>5</ComboBoxItem>
-                    <ComboBoxItem>6</ComboBoxItem>
-                    <ComboBoxItem>7</ComboBoxItem>
-                    <ComboBoxItem>8</ComboBoxItem>
-                    <ComboBoxItem>9</ComboBoxItem>
-                    <ComboBoxItem>10</ComboBoxItem>
-                </ComboBox>
-
-                <Button x:Name="ValidSearchByNumberIntervention" FontSize="12" Content="Valider" Margin="5,0,0,0" Width="60" Height="21" BorderBrush="LightGray" FontFamily="Segoe UI Light" Click="ValidSearchByNumberIntervention_Click"/>
-
-                <TextBlock Text="L'opération peut durer quelques secondes ..." x:Name="LoadNumberIntervention" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Light" Margin="10,0,0,0"/>
-            </StackPanel>
-
         </StackPanel>
 
         <Grid Grid.Row="1">

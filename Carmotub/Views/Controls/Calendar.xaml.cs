@@ -129,14 +129,13 @@ namespace Carmotub.Views.Controls
 
             await InterventionVM.Instance.GetAllIntervention();
 
-            // LINQ
             foreach (Dictionary<string, string> d in InterventionVM.Instance.Interventions)
             {
                 foreach (KeyValuePair<string, string> keyValue in d)
                 {
                     try
                     {
-                        if (keyValue.Key == "date_intervention" && keyValue.Value.ToString().Substring(3, 2) == CurrentDate.Month.ToString() && keyValue.Value.ToString().Substring(6, 4) == CurrentDate.Year.ToString())
+                        if (keyValue.Key == "date_intervention" && int.Parse(keyValue.Value.ToString().Substring(3, 2)) == int.Parse(CurrentDate.Month.ToString()) && keyValue.Value.ToString().Substring(6, 4) == CurrentDate.Year.ToString())
                         {
                             interventions.Add(d);
                         }
@@ -149,7 +148,6 @@ namespace Carmotub.Views.Controls
 
             foreach (var inter in interventions)
             {
-                // LINQ
                 foreach (Dictionary<string, string> d in CustomerVM.Instance.Customers)
                 {
                     foreach (KeyValuePair<string, string> keyValue in d)
